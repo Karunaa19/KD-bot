@@ -8,7 +8,6 @@ class heroSection{
     public:
 
     void introCalculator() {
-    // heroSection:: heroCalculator();
      cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
      cout << "\t\t-                                                                                                                  --"<< endl;
      cout << "\t\t---                                             KDA Calculator                                                    ----"<< endl;                     
@@ -23,9 +22,9 @@ class heroSection{
      cout << "\t\t-     z       |      M       |          1        |       q     |      2      |        3       |         B            |  " << endl;
      cout << "\t\t-  complex    |   matrix     |       ax+b=0      | ax^2+bx+c=0 |  anx+bny=cn | anx+bny+cnz=dn |        Base          |" << endl;
      cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
-     cout << "\t\t-     4       |      5       |          6        |       L     |      l      |        k       |         .           | "<<endl;
-     cout <<"\t\t-    sin'1     |    cos'1     |        tan'1      |      log    |      ln     |      clear     |        close             | "<<endl; 
-     cout <<"\t\t-----------------------------------------------------------------------------------------------------------------------"<<endl;          
+     cout << "\t\t-     4       |      5       |          6        |       L     |      l      |        k       |         .            | "<<endl;
+     cout << "\t\t-    sin'1    |    cos'1     |        tan'1      |      log    |      ln     |      clear     |        close         | "<<endl; 
+     cout << "\t\t-----------------------------------------------------------------------------------------------------------------------"<<endl;          
         
     }
 };
@@ -347,8 +346,6 @@ public:
         cout << "Octal: " << oct << number << endl;
     }
 };
-
-
 class kdaCalculator:public heroSection {
 private:
     Addition add;
@@ -372,9 +369,14 @@ private:
     MatrixOperations matrixOps;
 
 public:
-    void performOperation(char op) {
+    void performOperation() {
         double num1, num2;
         int intNum1, intNum2;
+        char op='\n';
+        while(op!='.'){
+          heroSection ::introCalculator(); 
+          cout<<"Enter operator: "<<endl;
+          cin>>op;
 
         switch (op) {
             case '+':
@@ -590,7 +592,6 @@ public:
         }
 
         case '4': {
-            // Inverse Sine operation
                 double value;
                 cout << "Enter a value : ";
                  cin >> value;
@@ -603,7 +604,6 @@ public:
             break;
         }
         case '5': {
-            // Inverse Cosine operation
             double value;
             cout<<"Enter value:"<<endl;
             if (value < -1.0 || value > 1.0) {
@@ -615,13 +615,28 @@ public:
             break;
         }
         case '6': {
-            // Inverse Tangent operation
-            double value;
+         double value;
             cout<<"Enter value:"<<endl;
             double result = atan(value);
             cout << "atan(" << value << ") = " << result << " radians" << endl;
             break;
         };
+
+        case 'L': {
+            double num;
+            cout<<"Enter number: "<<endl;
+            cin>>num;
+            cout<<log10(num);
+            break;
+        }
+        case 'l': {
+            double num;
+            cout<<"Enter number:"<<endl;
+            cin>>num;
+             cout<<log(num);
+
+            break;
+        }
         case '.':
         cout<<"Thank you!"<<endl;
         break;
@@ -630,9 +645,16 @@ public:
          case 'k':
             system("cls");
             heroSection::introCalculator();
+
             default:
                 cout << "Invalid choice" << endl;
                 break;
+        }
+        cout<<"press any key to continue "<<endl;
+        cin.ignore();
+        cin.get();
+        heroSection:: introCalculator();
+        
         }
     }
 };
@@ -640,21 +662,9 @@ public:
 int main() {
     system("cls");
     kdaCalculator calc;
-    char op;
-    heroSection hero;
-    // hero.introCalculator();
-    while (true) {
-         hero.introCalculator();
-        cout << "Enter your choice: ";
-        cin >> op;
-        if (op == 0) {
-            cout << "THANK YOU!" << endl;
-            break; 
-        }
-
-        calc.performOperation(op);
+    calc.performOperation();
+    return 0;
     }
 
-    return 0;
-}
+ 
 

@@ -85,7 +85,8 @@ public:
                     cin >> num2;
                 } else if (inp == 'k' || inp == '.') {
                    
-                } else {
+                } 
+                else {
                     cout << "Enter num 1: ";
                     cin >> num1;
                 }
