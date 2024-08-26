@@ -653,7 +653,8 @@ public:
         cout<<"press any key to continue "<<endl;
         cin.ignore();
         cin.get();
-        heroSection:: introCalculator();
+        system("cls");
+        // heroSection:: introCalculator();
         
         }
     }
