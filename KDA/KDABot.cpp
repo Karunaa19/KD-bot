@@ -122,8 +122,8 @@ public:
             } else if (choice.find("riddle") != string::npos) {
                 riddleBot.giveRiddle();
             } else if (choice.find("games") != string::npos) {
-                cout << "Let's play some games!" << endl;
-                system("tictactoe.exe"); // Opens the Tic-Tac-Toe game
+                cout << "Let's play tic-tac-toe!" << endl;
+                system(".\\tictactoe"); // Opens the Tic-Tac-Toe game
             } else if (choice.find("songs") != string::npos) {
                 system("start https://www.youtube.com"); // Opens YouTube in the default web browser
             } else if (choice.find("videos") != string::npos) {
