@@ -76,7 +76,7 @@ public:
                 }
             } else {
                 kdaCalculator();
-                cout << "Enter: ";
+                cout << "Enter operator : "<<endl;
                 cin >> inp;
                 if (inp == '+' || inp == '-' || inp == '*' || inp == '/' || inp == 'm' || inp == 'p') {
                     cout << "Enter num 1: ";
@@ -138,7 +138,12 @@ public:
                 converter = 0;
                 break;
             case '.':
-                break;
+                cout<<"Press any key to EXIT "<<endl;
+                cin.ignore();
+                cin.get();
+                system("cls");
+                system(".\\KDABot");
+                   
             default:
                 cout << "*****Please enter a valid number!***** " << endl;
             }
