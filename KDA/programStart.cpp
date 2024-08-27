@@ -83,6 +83,9 @@ public:
 
         system("cls");
         cout << "Registration is successful!" << endl;
+        cout<<"press any key to go back to the login page "<<endl;
+        cin.get();
+        system("cls");
         herobeforelogin();
     }
 
@@ -113,6 +116,10 @@ public:
                 if (count == 1) {
                     cout << "Your account is found!\n";
                     cout << "Your password is: " << fpass << endl;
+                    cout<<"press any key to go back to the main menu"<<endl;
+                    cin.ignore();
+                    cin.get();
+                    system("cls");
                 } else {
                     cout << "Sorry! Your account is not found" << endl;
                 }
@@ -154,7 +161,10 @@ public:
 
     void heroAfterlogin() {
         cout<<"press any key to continue "<<endl;
+        cin.ignore();
         cin.get();
+        system("cls");
+        
         system(".\\KDABot");
     }
 };
