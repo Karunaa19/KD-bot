@@ -47,6 +47,9 @@ public:
                     break;
                 case 4:
                     cout << "Thank you!" << endl;
+                    cout<<"press any key "<<endl;
+                    cin.ignore();
+                    cin.get();
                     break;
                 default:
                     cout << "Please choose a valid number \n" << endl;
@@ -186,11 +189,6 @@ public:
             system("cls");
             
         }
-    
-
-
-
-
     void heroAfterlogin() {
         cout<<"press any key to continue "<<endl;
         cin.ignore();
@@ -198,9 +196,6 @@ public:
         system(".\\KDAbot");
     }
 };
-
-
-
 int main() {
     loginRegistration lg;
     lg.herobeforelogin();

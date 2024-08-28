@@ -1,19 +1,36 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <iomanip>
 #include <ctime>
 #include <algorithm>
+#include <string>
 #include <cstdlib>
+
+using namespace std;
+    string reset = "\033[0m";  // Reset to default color
+    string red = "\033[31m";   // Red text
+    string green = "\033[32m"; // Green text
+    string blue = "\033[34m";  // Blue text
+    string yellow = "\033[33m";// Yellow text
+    string cyan = "\033[36m";  // Cyan text
+    const string RESET = "\033[0m";
+    const string RED = "\033[31m";
+    const string GREEN = "\033[32m";
+    const string YELLOW = "\033[33m";
+    const string BLUE = "\033[34m";
+    const string MAGENTA = "\033[35m";
+    const string CYAN = "\033[36m";
+    const string WHITE = "\033[37m";
+    const string BOLD = "\033[1m";
+    const string UNDERLINE = "\033[4m";
+
+
 
 
 using namespace std;
-
-// Placeholder classes for the different functionalities
 class TimeBot {
 public:
     void tellTime() {
-        // Provide current time
         time_t now = time(0);
         tm *ltm = localtime(&now);
         cout << "Current time : " << setfill('0') << setw(2) << ltm->tm_hour << ":"
@@ -50,12 +67,11 @@ public:
 class JokeBot {
 public:
     void tellJoke() {
-        // Placeholder for telling a joke
         cout << "Why don't scientists trust atoms? Because they make up everything!" << endl;
-        cout<<"How was the joke? please let me know"<<endl;
+        cout << "How was the joke? Please let me know: ";
         string response;
         getline(cin, response);
-        transform(response.begin(), response.end(), response.begin(), ::tolower); // Convert to lowercase
+        transform(response.begin(), response.end(), response.begin(), ::tolower);
 
         if (response.find("good") != string::npos || 
             response.find("great") != string::npos || 
@@ -63,66 +79,53 @@ public:
             response.find("nice") != string::npos) {
             cout << "That's great! Thank you for sharing. Do you wanna hear more joke (y or n)?" << endl;
             char r;
-            switch(r){
-                case 'y':
-                cout<<"sorry, jokes not available, Please comeback soon, i am underconstruction"<<endl;
-                cout<<"press any key to EXIT"<<endl;
+            cin >> r;
+            if (r == 'y') {
+                cout << "Sorry, jokes not available, Please comeback soon, I am under construction" << endl;
+                cout << "Press any key to EXIT" << endl;
                 cin.ignore();
                 cin.get();
                 system("cls");
-                break;
-                return;
-                case 'n':
-                cout<<"Hope you have a great day. press any key to EXIT"<<endl;
+            } else if (r == 'n') {
+                cout << "Hope you have a great day. Press any key to EXIT" << endl;
                 cin.ignore();
                 cin.get();
                 system("cls");
-                return;
-
-                }
-            
-
-        } 
-        else if (response.find("not nice") != string::npos || 
-                 response.find("bad") != string::npos || 
-                 response.find("worse") != string::npos || 
-                 response.find("not good") != string::npos) {
-            cout << "I'm sorry if i upset you. you can try my other features. "<<endl;
-            cout<<"press any key to EXIT"<<endl;
+            }
+        } else if (response.find("not nice") != string::npos || 
+                   response.find("bad") != string::npos || 
+                   response.find("worse") != string::npos || 
+                   response.find("not good") != string::npos) {
+            cout << "I'm sorry if I upset you. You can try my other features." << endl;
+            cout << "Press any key to EXIT" << endl;
             cin.ignore();
             cin.get();
             system("cls");
-            return;
-            
-
-        
-    }
+        }
     }
 };
 
 class RiddleBot {
 public:
     void giveRiddle() {
-        // Placeholder for giving a riddle
         cout << "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?" << endl;
-        cout<<"Do you wanna solve more riddle?"<<endl;
+        cout << "Do you wanna solve more riddle?" << endl;
         string response;
         getline(cin, response);
-        transform(response.begin(), response.end(), response.begin(), ::tolower); // Convert to lowercase
+        transform(response.begin(), response.end(), response.begin(), ::tolower);
 
         if (response.find("good") != string::npos || 
             response.find("great") != string::npos || 
             response.find("happy") != string::npos || 
             response.find("nice") != string::npos) {
             cout << "That's great! Thank you for sharing. Do you wanna solve more riddle?" << endl;
-        } 
-        else if (response.find("not nice") != string::npos || 
-                 response.find("bad") != string::npos || 
-                 response.find("worse") != string::npos || 
-                 response.find("not good") != string::npos) {
-            cout << "I'm sorry if i upset you. You can try my other features. ";
-            
-    }}
+        } else if (response.find("not nice") != string::npos || 
+                   response.find("bad") != string::npos || 
+                   response.find("worse") != string::npos || 
+                   response.find("not good") != string::npos) {
+            cout << "I'm sorry if I upset you. You can try my other features." << endl;
+        }
+    }
 };
 
 class UserManager {
@@ -136,9 +139,12 @@ class UserManager {
 public:
     void startChat(const string& loggedInUser) {
         system("cls");
-
-        cout << "\t\t\t\t\t\t\t\tHi, I am KDA bot" << endl;
-        cout << "\t\t\t\t\t\t\t\tHi " << loggedInUser << ", how are you feeling today?" << endl;
+    cout << "\t\t\t\t\t\t" << cyan << "*************************************************************" << reset << endl;
+    cout << "\t\t\t\t\t\t" << cyan << "*                                                           *" << reset << endl;
+    cout << "\t\t\t\t\t\t" << cyan << "*             " << BLUE << BOLD << "        Hi, I am KDA bot" << cyan << "                      *" << reset << endl;
+    cout << "\t\t\t\t\t\t" << cyan << "*" << BLUE << BOLD << "          Hi " + string(loggedInUser) + ", how are you feeling today?  " << cyan << "          *" << reset << endl;
+    cout << "\t\t\t\t\t\t" << cyan << "*                                                           *" << reset << endl;
+    cout << "\t\t\t\t\t\t" << cyan << "*************************************************************" << reset << endl;
         // Provide current date
         time_t now = time(0);
         tm *ltm = localtime(&now);
