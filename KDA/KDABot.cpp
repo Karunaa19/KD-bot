@@ -10,14 +10,6 @@
 using namespace std;
 
 // Placeholder classes for the different functionalities
-class WeatherBot {
-public:
-    void getWeather(const string& city) {
-        // Placeholder for weather information
-        cout << "Fetching weather information for " << city << "..." << endl;
-    }
-};
-
 class TimeBot {
 public:
     void tellTime() {
@@ -28,7 +20,6 @@ public:
              << setfill('0') << setw(2) << ltm->tm_min << ":" << setfill('0') << setw(2) << ltm->tm_sec << endl;
     }
 };
-
 class MapBot {
 public:
     void openMaps(const string& location) {
@@ -61,8 +52,51 @@ public:
     void tellJoke() {
         // Placeholder for telling a joke
         cout << "Why don't scientists trust atoms? Because they make up everything!" << endl;
+        cout<<"How was the joke? please let me know"<<endl;
+        string response;
+        getline(cin, response);
+        transform(response.begin(), response.end(), response.begin(), ::tolower); // Convert to lowercase
+
+        if (response.find("good") != string::npos || 
+            response.find("great") != string::npos || 
+            response.find("happy") != string::npos || 
+            response.find("nice") != string::npos) {
+            cout << "That's great! Thank you for sharing. Do you wanna hear more joke (y or n)?" << endl;
+            char r;
+            switch(r){
+                case 'y':
+                cout<<"sorry, jokes not available, Please comeback soon, i am underconstruction"<<endl;
+                cout<<"press any key to EXIT"<<endl;
+                cin.ignore();
+                cin.get();
+                system("cls");
+                break;
+                return;
+                case 'n':
+                cout<<"Hope you have a great day. press any key to EXIT"<<endl;
+                cin.ignore();
+                cin.get();
+                system("cls");
+                return;
+
+                }
+            
+
+        } 
+        else if (response.find("not nice") != string::npos || 
+                 response.find("bad") != string::npos || 
+                 response.find("worse") != string::npos || 
+                 response.find("not good") != string::npos) {
+            cout << "I'm sorry if i upset you. you can try my other features. "<<endl;
+            cout<<"press any key to EXIT"<<endl;
+            cin.ignore();
+            cin.get();
+            system("cls");
+            return;
+            
 
         
+    }
     }
 };
 
@@ -71,11 +105,28 @@ public:
     void giveRiddle() {
         // Placeholder for giving a riddle
         cout << "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?" << endl;
-    }
+        cout<<"Do you wanna solve more riddle?"<<endl;
+        string response;
+        getline(cin, response);
+        transform(response.begin(), response.end(), response.begin(), ::tolower); // Convert to lowercase
+
+        if (response.find("good") != string::npos || 
+            response.find("great") != string::npos || 
+            response.find("happy") != string::npos || 
+            response.find("nice") != string::npos) {
+            cout << "That's great! Thank you for sharing. Do you wanna solve more riddle?" << endl;
+        } 
+        else if (response.find("not nice") != string::npos || 
+                 response.find("bad") != string::npos || 
+                 response.find("worse") != string::npos || 
+                 response.find("not good") != string::npos) {
+            cout << "I'm sorry if i upset you. You can try my other features. ";
+            
+    }}
 };
 
 class UserManager {
-    WeatherBot weatherBot;
+
     TimeBot timeBot;
     MapBot mapBot;
     ApplicationBot applicationBot;
@@ -84,10 +135,8 @@ class UserManager {
 
 public:
     void startChat(const string& loggedInUser) {
-        cout<<"Press any key to continue"<<endl;
-        cin.ignore();
-        cin.get();
         system("cls");
+
         cout << "\t\t\t\t\t\t\t\tHi, I am KDA bot" << endl;
         cout << "\t\t\t\t\t\t\t\tHi " << loggedInUser << ", how are you feeling today?" << endl;
         // Provide current date
@@ -123,9 +172,9 @@ public:
                 riddleBot.giveRiddle();
             } else if (choice.find("games") != string::npos) {
                 cout << "Let's play tic-tac-toe!" << endl;
-                system(".\\tictactoe"); // Opens the Tic-Tac-Toe game
+                system(".\\tictactoe");
             } else if (choice.find("songs") != string::npos) {
-                system("start https://www.youtube.com"); // Opens YouTube in the default web browser
+                system("start https://www.youtube.com"); 
             } else if (choice.find("videos") != string::npos) {
                 system("start https://www.youtube.com"); // Opens YouTube in the default web browser
             } else {
@@ -150,13 +199,12 @@ public:
             string line;
             getline(cin, line);
 
-            if (line == "exit") break;
-            else if (line.find("weather") != string::npos) {
-                cout << "Please enter the city name to get weather information: ";
-                string city;
-                getline(cin, city);
-                weatherBot.getWeather(city);
+            if (line == "exit") {
+
+                system("cls");
+                system(".\\programStart");
             }
+
             else if (line.find("time") != string::npos) {
                 timeBot.tellTime();
             }
@@ -195,7 +243,8 @@ public:
                      line.find("product") != string::npos ||
                      line.find("math") != string::npos||
                      line.find("log")!=string::npos||
-                     line.find("value")!=string::npos
+                     line.find("value")!=string::npos||
+                     line.find("solve")!=string::npos
                      ) {
                 cout << "Would you like to open a calculator? (yes/no): ";
                 string answer;
@@ -232,7 +281,7 @@ public:
                     riddleBot.giveRiddle();
                 } else if (choice.find("games") != string::npos) {
                     cout << "Let's play some games!" << endl;
-                    system("tictactoe.exe"); // Opens the Tic-Tac-Toe game
+                    system(".\\tictactoe"); // Opens the Tic-Tac-Toe game
                 } else if (choice.find("songs") != string::npos) {
                     system("start https://www.spotify.com"); // Opens YouTube in the default web browser
                 } else if (choice.find("videos") != string::npos) {
@@ -249,6 +298,7 @@ public:
 };
 
 int main() {
+    system("cls");
 
     UserManager UserManager;
     string loggedInUser;

@@ -642,7 +642,7 @@ public:
         cin.ignore();
         cin.get();
         system("cls");
-        system(".\\KDABot");
+        system(".\\KDAbot");
         break;
 
          

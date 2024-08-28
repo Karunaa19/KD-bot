@@ -1,7 +1,18 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>
 using namespace std;
+const string RESET = "\033[0m";
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BLUE = "\033[34m";
+const string MAGENTA = "\033[35m";
+const string CYAN = "\033[36m";
+const string WHITE = "\033[37m";
+const string BOLD = "\033[1m";
+const string UNDERLINE = "\033[4m";
 
 class loginRegistration {
 public:
@@ -9,17 +20,18 @@ public:
         int c;
         do {
             system("cls");
+
             cout << endl << endl;
-            cout << "\t\t\t\t\t\t\t\tHi, I am KDA bot" << endl;
-            cout << "\t\t\t\t\t\t\tI am your personal Assistant!" << endl;
+            cout << BLUE << BOLD << "\t\t\t\t\t\t\t\tHi, I am KDA bot" << RESET << endl;
+            cout << BLUE << BOLD << "\t\t\t\t\t\t\tI am your personal Assistant!" << RESET << endl;
             cout << endl << endl << endl;
-            cout << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t\t|                     Please create your account to continue.........            |" << endl;
-            cout << "\t\t\t\t----------------------------------------------------------------------------------" << endl;
-            cout << "\t\tPress 1 to LOGIN " << endl;
-            cout << "\t\tPress 2 to REGISTER" << endl;
-            cout << "\t\tPress 3 if you forget your PASSWORD" << endl;
-            cout << "\t\tPress 4 to EXIT" << endl;
+            cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << RESET << endl;
+            cout << CYAN << BOLD << "\t\t\t\t|                    Please create your account to reach KDA bot.........        |" << RESET << endl;
+            cout << CYAN << BOLD << "\t\t\t\t----------------------------------------------------------------------------------" << RESET << endl;
+            cout << YELLOW << "\t\tPress 1 to LOGIN " << RESET << endl;
+            cout << YELLOW << "\t\tPress 2 to REGISTER" << RESET << endl;
+            cout << YELLOW << "\t\tPress 3 if you forget your PASSWORD" << RESET << endl;
+            cout << YELLOW << "\t\tPress 4 to EXIT" << RESET << endl;
             cin >> c;
             cout << endl;
 
@@ -67,6 +79,10 @@ public:
             heroAfterlogin(); // Call this function after successful login
         } else {
             cout << "\nPlease check your username and password" << endl;
+            cout<<"press any key to go back to the login page"<<endl;
+            cin.ignore();
+            cin.get();
+            system("cls");
         }
     }
 
@@ -93,8 +109,9 @@ public:
         int option;
         system("cls");
         cout << "Forgot password?" << endl;
-        cout << "Press 1 to search your id by username" << endl;
-        cout << "Press 2 to go back to the main menu" << endl;
+        cout << "Press 1 to search your id by username" << endl;  
+        cout << "press 2 to reset your password "<<endl;
+         cout << "Press 3 to go back to the main menu" << endl;
         cin >> option;
 
         switch (option) {
@@ -125,49 +142,64 @@ public:
                 }
                 break;
             }
-            case 2:
-                break;
-            default:
-                cout << "Please try again" << endl;
-                break;
+                case 2:{
+                void resetPassword(const string& username);
+                  
+                  break;
+                  }
+        break;
+       case 3:
+         break;
+        default:
+        cout << "Please try again" << endl;
+        break;
         }
+        
+     
     }
-
     void resetPassword(const string& username) {
-        string newPassword;
-        cout << "Enter your new password: ";
-        cin >> newPassword;
+                string newPassword;
+                cout << "Enter your new password: ";
+                cin >> newPassword;
 
-        ifstream inFile("userRecords.txt");
-        ofstream tempFile("temp.txt");
-        string id, pass;
+                ifstream inFile("userRecords.txt");
+                    ofstream tempFile("temp.txt");
+                string id, pass;
 
-        while (inFile >> id >> pass) {
-            if (id == username) {
-                tempFile << id << ' ' << newPassword << endl;
-            } else {
-                tempFile << id << ' ' << pass << endl;
+            while (inFile >> id >> pass) {
+                if (id == username) {
+                    tempFile << id << ' ' << newPassword << endl;
+                } else {
+                    tempFile << id << ' ' << pass << endl;
+                }
             }
+            inFile.close();
+            tempFile.close();
+
+            remove("userRecords.txt");
+            rename("temp.txt", "userRecords.txt");
+
+            cout << "Password reset successfully!" << endl;
+            cout<<"press any key to go back to the main menu"<<endl;
+            cin.ignore();
+            cin.get();
+            system("cls");
+            
         }
-        inFile.close();
-        tempFile.close();
+    
 
-        remove("userRecords.txt");
-        rename("temp.txt", "userRecords.txt");
 
-        cout << "Password reset successfully!" << endl;
-        herobeforelogin();
-    }
+
 
     void heroAfterlogin() {
         cout<<"press any key to continue "<<endl;
         cin.ignore();
         cin.get();
-        system("cls");
-        
-        system(".\\KDABot");
+        system(".\\KDAbot");
     }
 };
+
+
 
 int main() {
     loginRegistration lg;
