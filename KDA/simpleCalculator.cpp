@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cmath>
 #include <windows.h>
@@ -165,9 +164,7 @@ public:
                 cout<<"Press any key to EXIT "<<endl;
                 cin.ignore();
                 cin.get();
-                system("cls");
-                system(".\\KDAbot");
-                   
+                break;             
             default:
                 cout << "*****Please enter a valid number!***** " << endl;
             }

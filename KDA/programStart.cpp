@@ -13,7 +13,6 @@ const string CYAN = "\033[36m";
 const string WHITE = "\033[37m";
 const string BOLD = "\033[1m";
 const string UNDERLINE = "\033[4m";
-
 class loginRegistration {
 public:
     void herobeforelogin() {
@@ -46,6 +45,7 @@ public:
                     forgotPassword();
                     break;
                 case 4:
+                    cout<<" Do visit soon for good experience, I am under construction..."<<endl;
                     cout << "Thank you!" << endl;
                     cout<<"press any key "<<endl;
                     cin.ignore();
@@ -79,7 +79,7 @@ public:
 
         if (count == 1) {
             cout << userNam << "\nYour login is successful \nThanks for logging in!\n";
-            heroAfterlogin(); // Call this function after successful login
+            heroAfterlogin(); 
         } else {
             cout << "\nPlease check your username and password" << endl;
             cout<<"press any key to go back to the login page"<<endl;
@@ -96,7 +96,7 @@ public:
         cout << "Enter the password: ";
         cin >> rpassword;
 
-        ofstream write("userRecords.txt", ios::app);
+        ofstream write("userRecords.txt", ios::app); //to write in file
         write << ruserNam << ' ' << rpassword << endl;
         write.close();
 
@@ -113,8 +113,7 @@ public:
         system("cls");
         cout << "Forgot password?" << endl;
         cout << "Press 1 to search your id by username" << endl;  
-        cout << "press 2 to reset your password "<<endl;
-         cout << "Press 3 to go back to the main menu" << endl;
+         cout << "Press 2 to go back to the main menu" << endl;
         cin >> option;
 
         switch (option) {
@@ -146,13 +145,8 @@ public:
                 break;
             }
                 case 2:{
-                void resetPassword(const string& username);
-                  
                   break;
                   }
-        break;
-       case 3:
-         break;
         default:
         cout << "Please try again" << endl;
         break;
@@ -160,40 +154,11 @@ public:
         
      
     }
-    void resetPassword(const string& username) {
-                string newPassword;
-                cout << "Enter your new password: ";
-                cin >> newPassword;
-
-                ifstream inFile("userRecords.txt");
-                    ofstream tempFile("temp.txt");
-                string id, pass;
-
-            while (inFile >> id >> pass) {
-                if (id == username) {
-                    tempFile << id << ' ' << newPassword << endl;
-                } else {
-                    tempFile << id << ' ' << pass << endl;
-                }
-            }
-            inFile.close();
-            tempFile.close();
-
-            remove("userRecords.txt");
-            rename("temp.txt", "userRecords.txt");
-
-            cout << "Password reset successfully!" << endl;
-            cout<<"press any key to go back to the main menu"<<endl;
-            cin.ignore();
-            cin.get();
-            system("cls");
-            
-        }
     void heroAfterlogin() {
         cout<<"press any key to continue "<<endl;
         cin.ignore();
         cin.get();
-        system(".\\KDAbot");
+        system("start kdaBot.exe");
     }
 };
 int main() {

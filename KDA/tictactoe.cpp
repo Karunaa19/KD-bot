@@ -8,11 +8,14 @@ int currentPlayer;
 
 void drawBoard() {
     system("cls");
-    cout << " " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << endl;
-    cout << "---|---|---" << endl;
-    cout << " " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << endl;
-    cout << "---|---|---" << endl;
-    cout << " " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << endl;
+    cout << endl << endl ;
+    cout << "\t\t\t\t     KDA-TIC-TAC-TOE"<< endl;
+    cout << endl;
+    cout << "\t\t\t\t\t" << " " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << endl;
+    cout << "\t\t\t\t\t" << "---|---|---" << endl;
+    cout << "\t\t\t\t\t"<< " " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << endl;
+    cout << "\t\t\t\t\t" << "---|---|---" << endl;
+    cout << "\t\t\t\t\t" << " " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << endl;
 }
 
 void initializeBoard() {
@@ -42,19 +45,18 @@ void undoMove(int slot) {
 }
 
 int winner() {
-    // Check rows
     for (int i = 0; i < 3; i++) {
         if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
             return (board[i][0] == 'X') ? 1 : 2;
         }
     }
-    // Check columns
+
     for (int i = 0; i < 3; i++) {
         if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
             return (board[0][i] == 'X') ? 1 : 2;
         }
     }
-    // Check diagonals
+
     if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
         return (board[0][0] == 'X') ? 1 : 2;
     }
@@ -155,7 +157,8 @@ void playGame() {
     while (true) {
         int slot;
         if (currentPlayer == 1) {
-            cout << "It's Player 1's turn. Enter your slot: ";
+            cout << endl;
+            cout << "It's your turn: ";
             cin >> slot;
 
             if (!placeMarker(slot, 'X')) {
@@ -163,12 +166,12 @@ void playGame() {
                 continue;
             }
 
-            system("cls"); // Clear the screen
+            system("cls"); 
             drawBoard();
 
             int win = winner();
             if (win == 1) {
-                cout << "Player 1 wins!\n";
+                cout << "You win!\n";
                 break;
             } else if (boardIsFull()) {
                 cout << "It's a tie!\n";
@@ -180,7 +183,7 @@ void playGame() {
 
         if (currentPlayer == 2) {
             computerMove();
-            system("cls"); // Clear the screen
+            system("cls"); 
             drawBoard();
 
             int win = winner();
@@ -201,8 +204,8 @@ int main() {
     system ("cls");
     char playAgain;
     do {
-        cout << "Welcome to Tic-Tac-Toe!\n";
-        cout << "Player 1, choose your marker: ";
+        cout << "\t\t\t\t\tWelcome to Tic-Tac-Toe!\n";
+        cout << "\t\t\t\t\tChoose your marker: ";
         char markerP1;
         cin >> markerP1;
 
@@ -214,12 +217,10 @@ int main() {
         cout << "Do you want to play again? (y/n): ";
         cin >> playAgain;
 
-
-    } while (playAgain == 'y' || playAgain == 'Y');
-            if (playAgain == 'n' || playAgain == 'N') {
-                cout<<"press any key to EXIT "<<endl;
-            system(".\\KDAbot");
+        if (playAgain == 'n' || playAgain == 'N') {
+            exit(0);
         }
+    } while (playAgain == 'y' || playAgain == 'Y');
 
     return 0;
 }
