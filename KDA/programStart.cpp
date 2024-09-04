@@ -45,7 +45,8 @@ public:
                     forgotPassword();
                     break;
                 case 4:
-                    cout<<" Do visit soon for good experience, I am under construction..."<<endl;
+                cout<<"endl";
+                    cout<<" \t\tDo visit soon for good experience, I am under construction..."<<endl;
                     cout << "Thank you!" << endl;
                     cout<<"press any key "<<endl;
                     cin.ignore();
@@ -68,7 +69,7 @@ public:
         cout << "Password: ";
         cin >> userpass;
 
-        ifstream read("userRecords.txt"); // to read the data
+        ifstream read("userRecords.txt"); 
         while (read >> id >> pass) {
             if (id == userNam && pass == userpass) {
                 count = 1;
@@ -78,7 +79,7 @@ public:
         read.close();
 
         if (count == 1) {
-            cout << userNam << "\nYour login is successful \nThanks for logging in!\n";
+            cout << userNam << "\nYour login is successful. \nThanks for logging in!\n";
             heroAfterlogin(); 
         } else {
             cout << "\nPlease check your username and password" << endl;
