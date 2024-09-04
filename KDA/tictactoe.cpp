@@ -1,21 +1,31 @@
 #include <iostream>
-#include <cstdlib>  
+#include <cstdlib>
 using namespace std;
 
 char board[3][3];
 char currentMarker;
 int currentPlayer;
 
+const string RESET = "\033[0m";
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BLUE = "\033[34m";
+const string MAGENTA = "\033[35m";
+const string CYAN = "\033[36m";
+const string WHITE = "\033[37m";
+const string BOLD = "\033[1m";
+
 void drawBoard() {
     system("cls");
-    cout << endl << endl ;
-    cout << "\t\t\t\t     KDA-TIC-TAC-TOE"<< endl;
+    cout << endl << endl;
+    cout << BOLD << CYAN << "\t\t\t\t     KDA-TIC-TAC-TOE" << RESET << endl;
     cout << endl;
-    cout << "\t\t\t\t\t" << " " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << endl;
-    cout << "\t\t\t\t\t" << "---|---|---" << endl;
-    cout << "\t\t\t\t\t"<< " " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << endl;
-    cout << "\t\t\t\t\t" << "---|---|---" << endl;
-    cout << "\t\t\t\t\t" << " " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << endl;
+    cout << "\t\t\t\t\t" << WHITE << " " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << RESET << endl;
+    cout << "\t\t\t\t\t" << WHITE << "---|---|---" << RESET << endl;
+    cout << "\t\t\t\t\t" << WHITE << " " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << RESET << endl;
+    cout << "\t\t\t\t\t" << WHITE << "---|---|---" << RESET << endl;
+    cout << "\t\t\t\t\t" << WHITE << " " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << RESET << endl;
 }
 
 void initializeBoard() {
@@ -126,7 +136,7 @@ void swapPlayerAndMarker() {
     }
 }
 
-void computerMove() {
+void botMove() {
     int bestMove = -1;
     int bestScore = -1000;
 
@@ -158,23 +168,23 @@ void playGame() {
         int slot;
         if (currentPlayer == 1) {
             cout << endl;
-            cout << "It's your turn: ";
+            cout << GREEN << "It's your turn: " << RESET;
             cin >> slot;
 
             if (!placeMarker(slot, 'X')) {
-                cout << "Slot occupied! Try again.\n";
+                cout << RED << "Slot occupied! Try again.\n" << RESET;
                 continue;
             }
 
-            system("cls"); 
+            system("cls");
             drawBoard();
 
             int win = winner();
             if (win == 1) {
-                cout << "You win!\n";
+                cout << GREEN << "You win!\n" << RESET;
                 break;
             } else if (boardIsFull()) {
-                cout << "It's a tie!\n";
+                cout << YELLOW << "It's a tie!\n" << RESET;
                 break;
             }
         }
@@ -182,16 +192,16 @@ void playGame() {
         swapPlayerAndMarker();
 
         if (currentPlayer == 2) {
-            computerMove();
+            botMove();
             system("cls"); 
             drawBoard();
 
             int win = winner();
             if (win == 2) {
-                cout << "Computer wins!\n";
+                cout << RED << "huhu I am the winner!!\n" << RESET;
                 break;
             } else if (boardIsFull()) {
-                cout << "It's a tie!\n";
+                cout << YELLOW << "It's a tie!\n" << RESET;
                 break;
             }
 
@@ -201,26 +211,25 @@ void playGame() {
 }
 
 int main() {
-    system ("cls");
-    char playAgain;
+    system("cls"); 
+    char playAgain = 'y';
     do {
-        cout << "\t\t\t\t\tWelcome to Tic-Tac-Toe!\n";
-        cout << "\t\t\t\t\tChoose your marker: ";
-        char markerP1;
-        cin >> markerP1;
+        cout << CYAN << "\t\t\t\t\tHUHU, let's play !!\n" << RESET;
+        cout << MAGENTA << "\t\t\t\t\tChoose your marker (X/O): " << RESET;
+        char marker;
+        cin >> marker;
 
-        currentPlayer = 1;
-        currentMarker = markerP1;
+        currentMarker = marker;
+        currentPlayer = (currentMarker == 'X') ? 1 : 2;
 
         playGame();
 
-        cout << "Do you want to play again? (y/n): ";
+        cout << CYAN << "\t\t\t\t\tDo you want to play again? (y/n): " << RESET;
         cin >> playAgain;
-
-        if (playAgain == 'n' || playAgain == 'N') {
-            exit(0);
-        }
     } while (playAgain == 'y' || playAgain == 'Y');
+
+    cout << YELLOW << "\n\t\t\t\t\tThanks for playing! Goodbye!" << RESET << endl;
 
     return 0;
 }
+
