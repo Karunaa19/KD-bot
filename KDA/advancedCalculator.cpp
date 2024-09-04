@@ -17,7 +17,7 @@ class heroSection{
      cout << "\t\t-    Add      |   Subtract   |       multiply   |     Divide   |     mod     |     power      |      factorial      |" << endl;
      cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
      cout << "\t\t-     s       |      c       |          t       |        P     |      C      |        x       |         y           |" << endl;
-     cout << "\t\t-    sin      |     cos      |         tan      |       npr    |     ncr     |      c to p    |       p yo c        |" << endl;
+     cout << "\t\t-    sin      |     cos      |         tan      |       npr    |     ncr     |      c to p    |       p to c        |" << endl;
      cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
      cout << "\t\t-     z       |      M       |          1        |       q     |      2      |        3       |         B            |  " << endl;
      cout << "\t\t-  complex    |   matrix     |       ax+b=0      | ax^2+bx+c=0 |  anx+bny=cn | anx+bny+cnz=dn |        Base          |" << endl;
