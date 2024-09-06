@@ -1,4 +1,4 @@
-# 🤖 KDA-BOT
+# 🤖 KDA-bot
 
 ## 📝 Description:
 KDA-BOT is a simple personal assistant model programmed in C++. It includes user management functions, chat systems, calculators, and a simple tictactoe game.
@@ -66,7 +66,6 @@ KDA-BOT does not collect or store any personal information, All tasks including 
 
 Feel free using KDA-bot ,knowing that your privacy is safeguarded.
 
-## 🤝 Contributions
-Contributions are welcome! Feel free to open issues or submit pull requests. 
+
 
 
