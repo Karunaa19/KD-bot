@@ -4,6 +4,12 @@
 KDA-BOT is a simple personal assistant model programmed in C++. It includes user management functions, chat systems, calculators, and a simple tictactoe game.
 The bot is an all-in-one solution that incorporates a user-friendly interface to manage your day to day life.
 
+## Team Members
+
+- [Dipika Chaudhary](https://github.com/notdipika)
+- [Karuna Karki](https://github.com/karkikaruna)
+- [Aarju Gautam](https://github.com/aarzugit)
+
 ## 📂 File Structures
 
 - programStart.cpp: handles user registration, login, logout, resetting password functionalities.
@@ -55,8 +61,4 @@ To run the project, follow these steps:
 ![KDA-BOT](https://github.com/user-attachments/assets/3b68b227-8450-438a-971d-93a857b5f530)     ![KDA-BOT](https://github.com/user-attachments/assets/67958e40-02b0-4686-9c09-4baac1c15939) 
 ![byee](https://github.com/user-attachments/assets/7119da5c-8f93-4f22-b9bf-5d5ecd0dd709)
 
-## Team Members
 
-- [Dipika Chaudhary](https://github.com/notdipika)
-- [Karuna Karki](https://github.com/karkikaruna)
-- [Aarju Gautam](https://github.com/aarzugit)
