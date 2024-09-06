@@ -1,169 +1,292 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdexcept>
 #include <cstdlib>
+#include <windows.h> 
 using namespace std;
+
 const string RESET = "\033[0m";
-const string RED = "\033[31m";
-const string GREEN = "\033[32m";
 const string YELLOW = "\033[33m";
 const string BLUE = "\033[34m";
-const string MAGENTA = "\033[35m";
 const string CYAN = "\033[36m";
-const string WHITE = "\033[37m";
 const string BOLD = "\033[1m";
-const string UNDERLINE = "\033[4m";
-class loginRegistration {
+
+class UserManager {
+private:
+    string loggedInUser;
+    string loggedInPassword;
+    bool isLoggedIn = false;
+
 public:
-    void herobeforelogin() {
-        int c;
+    void registerUser() {
+        system("cls");
+        cout << BLUE << BOLD << "\t\t\t\t\t\t\t   KDA-BOT\n" << endl;
+        cout << CYAN <<"\t\t\t\t\t\t\tREGISTRATION"<< RESET <<endl;
+        try {
+            while (true) {
+                cout << YELLOW << "\nEnter a username: "<<RESET;
+                getline(cin, loggedInUser);
+
+                if (isUsernameTaken(loggedInUser)) {
+                    cout << "Username is unavailable. Please try again." << endl;
+                } else {
+                    break;
+                }
+            }
+            
+            cout << YELLOW << "Enter a password: "<<RESET;
+            getline(cin, loggedInPassword);
+            saveCredentials();
+            cout << "Registration successful! Please log in." << endl;
+        } catch (const exception& e) {
+            cout << "Error: " << e.what() << endl;
+        }
+    }
+
+    void login() {
+        system("cls");
+        cout << BLUE << BOLD << "\t\t\t\t\t\t\tKDA-BOT\n" << endl;
+        cout << CYAN <<"\t\t\t\t\t\t\t LOGIN"<< RESET <<endl;
+        try {
+            string username, password;
+            cout << YELLOW << "Username: "<<RESET;
+            getline(cin, username);
+
+            if (!isUsernameTaken(username)) {
+            cout << "Username doesn't exist." << endl<< endl;
+            cout<< CYAN<<"\t\t\t\t\t\t  1. TRY AGAIN" << RESET << endl;
+            cout<< CYAN<<"\t\t\t\t\t\t  2. RETURN TO HOME" << RESET << endl;
+            int choice;
+            cin >> choice;
+            cin.ignore();
+            if (choice == 1) {
+                login();  
+            } 
+            return; 
+        }
+
+            int attempts = 3;
+            while (attempts > 0) {
+                cout << YELLOW << "Password: "<<RESET;
+                getline(cin, password);
+
+                if (checkCredentials(username, password)) {
+                    system("cls");
+                    isLoggedIn = true;
+                    loggedInUser = username;
+                    loggedInPassword = password;
+                    cout << CYAN << BOLD << "\n\n\n\t\t\t\t\t\tLogin successful."<< RESET << endl << endl;
+                    return;  
+                } else {
+                    attempts--;
+                    if (attempts > 0) {
+                        cout << "Incorrect password. Please try again." << endl;
+                    } else {
+                        cout << "Incorrect password." << endl << endl;
+                        cout<< CYAN<<"\t\t\t\t\t\t1. RESET YOUR PASSWORD"<< RESET <<endl;
+                        cout<< CYAN<<"\t\t\t\t\t\t2. RETURN TO HOME"<< RESET << endl;
+                        int choice;
+                        cin >> choice;
+                        cin.ignore(); 
+
+                        if (choice == 1) {
+                            forgotPassword(username);
+                        }
+                        return;
+                    }
+                }
+            }
+        } catch (const exception& e) {
+            cout << "Error: " << e.what() << endl;
+        }
+    }
+
+    void logout() {
+        try {
+            if (isLoggedIn) {
+                cout << "Logging out..." << endl;
+                isLoggedIn = false;
+                loggedInUser.clear();
+                loggedInPassword.clear();
+            } else {
+                cout << "No user is logged in." << endl;
+            }
+        } catch (const exception& e) {
+            cout << "Error: " << e.what() << endl;
+        }
+    }
+
+    bool isUserLoggedIn() const {
+        return isLoggedIn;
+    }
+
+    void forgotPassword(const string& username) {
+        try {
+            string newPassword;
+            cout << "Enter your new password: ";
+            getline(cin, newPassword);
+
+            if (resetPassword(username, newPassword)) {
+                cout << "Password reset successfully!" << endl;
+            } else {
+                cout << "Username not found. Could not reset password." << endl;
+            }
+        } catch (const exception& e) {
+            cout << "Error: " << e.what() << endl;
+        }
+    }
+
+private:
+    void saveCredentials() {
+        ofstream file("users.txt", ios::app);
+        if (!file) throw runtime_error("Failed to open file for saving credentials.");
+        file << loggedInUser << ":" << loggedInPassword << endl;
+        file.close();
+    }
+
+    bool checkCredentials(const string& username, const string& password) {
+        ifstream file("users.txt");
+        if (!file) throw runtime_error("Failed to open file for reading credentials.");
+        string savedUsername, savedPassword;
+        while (getline(file, savedUsername, ':')) {
+            getline(file, savedPassword);
+            if (username == savedUsername && password == savedPassword) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool isUsernameTaken(const string& username) {
+        ifstream file("users.txt");
+        if (!file) {
+            ofstream newFile("users.txt");
+            newFile.close();
+            return false; 
+        }
+
+        string savedUsername, savedPassword;
+        while (getline(file, savedUsername, ':')) {
+            getline(file, savedPassword);
+            if (username == savedUsername) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool fileExists(const string& filename) {
+        ifstream file(filename);
+        return file.good();
+    }
+
+    bool resetPassword(const string& username, const string& newPassword) {
+        ifstream inFile("users.txt");
+        ofstream tempFile("temp.txt");
+        string line;
+        bool userFound = false;
+
+        while (getline(inFile, line)) {
+            size_t delimiterPos = line.find(':');
+            string id = line.substr(0, delimiterPos);
+            string pass = line.substr(delimiterPos + 1);
+
+            if (id == username) {
+                tempFile << id << ":" << newPassword << endl;
+                userFound = true;
+            } else {
+                tempFile << id << ":" << pass << endl;
+            }
+        }
+        inFile.close();
+        tempFile.close();
+
+        remove("users.txt");
+        rename("temp.txt", "users.txt");
+
+        return userFound;
+    }
+};
+
+class LoginRegistration {
+private:
+    UserManager userManager;
+
+public:
+    void heroBeforeLogin() {
+        int choice;
         do {
             system("cls");
-
             cout << endl << endl;
-            cout << BLUE << BOLD << "\t\t\t\t\t\t\t\tHi, I am KDA bot" << RESET << endl;
-            cout << BLUE << BOLD << "\t\t\t\t\t\t\tI am your personal Assistant!" << RESET << endl;
-            cout << endl << endl << endl;
-            cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << RESET << endl;
-            cout << CYAN << BOLD << "\t\t\t\t|                    Please create your account to reach KDA bot.........        |" << RESET << endl;
-            cout << CYAN << BOLD << "\t\t\t\t----------------------------------------------------------------------------------" << RESET << endl;
-            cout << YELLOW << "\t\tPress 1 to LOGIN " << RESET << endl;
-            cout << YELLOW << "\t\tPress 2 to REGISTER" << RESET << endl;
-            cout << YELLOW << "\t\tPress 3 if you forget your PASSWORD" << RESET << endl;
-            cout << YELLOW << "\t\tPress 4 to EXIT" << RESET << endl;
-            cin >> c;
-            cout << endl;
+            cout << BLUE << BOLD << "\t\t\t\t\t\t\t\tHi, I am KDA-BOT" << endl;
+            cout << BLUE << BOLD << "\t\t\t\t\t\t\tI am your personal Assistant!" << endl;
+            cout << endl << endl ;
+            
+            if (userManager.isUserLoggedIn()) {
+                cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
+                cout << CYAN << BOLD << "\t\t\t\t|                    Do you want to logout or continue?                         |" << endl;
+                cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t1. LOGOUT" << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t2. START A NEW CHAT" << endl;
+                cin >> choice;
+                cin.ignore(); 
 
-            switch (c) {
-                case 1:
-                    userLogin();
-                    break;
-                case 2:
-                    registerUser();
-                    break;
-                case 3:
-                    forgotPassword();
-                    break;
-                case 4:
-                cout<<"endl";
-                    cout<<" \t\tDo visit soon for good experience, I am under construction..."<<endl;
-                    cout << "Thank you!" << endl;
-                    cout<<"press any key "<<endl;
-                    cin.ignore();
-                    cin.get();
-                    break;
-                default:
-                    cout << "Please choose a valid number \n" << endl;
-                    break;
+                if (choice == 1) {
+                    userManager.logout();
+                } else if (choice == 2) {
+                    heroAfterLogin();
+                }
+            } else {
+                cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
+                cout << CYAN << BOLD << "\t\t\t\t|                     Please LOGIN TO REACH KDA BOT.........                    |" << endl;
+                cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t\t\t\t   1. LOGIN " <<""<<YELLOW<<"  2.REGISTER"<<YELLOW<<"  3.EXIT"<<RESET<< endl;
+                cin >> choice;
+                cin.ignore(); 
+
+                switch (choice) {
+                    case 1:
+                        userLogin();
+                        break;
+                    case 2:
+                        userManager.registerUser();
+                        break;
+                    case 3:
+                        system("cls");
+                        cout << BLUE << BOLD << "\t\t\t\t\t\t\t  KDA-BOT\n" << endl;
+                        cout << CYAN << "\t\t\t\t\t\tTHANK YOU, PLEASE VISIT AGAIN!" << RESET <<endl;
+                        cin.ignore();
+                        system("Cls");
+                        break;
+                    default:
+                        cout << "Please choose a valid number \n" << endl;
+                        break;
+                }
             }
-        } while (c != 4);
+        } while (choice != 3 && !userManager.isUserLoggedIn());
     }
 
     void userLogin() {
-        int count = 0;
-        string userNam, userpass, id, pass;
-        system("cls");
-        cout << "Please enter the username and password: " << endl;
-        cout << "Username: ";
-        cin >> userNam;
-        cout << "Password: ";
-        cin >> userpass;
-
-        ifstream read("userRecords.txt"); 
-        while (read >> id >> pass) {
-            if (id == userNam && pass == userpass) {
-                count = 1;
-                break;
-            }
-        }
-        read.close();
-
-        if (count == 1) {
-            cout << userNam << "\nYour login is successful. \nThanks for logging in!\n";
-            heroAfterlogin(); 
-        } else {
-            cout << "\nPlease check your username and password" << endl;
-            cout<<"press any key to go back to the login page"<<endl;
-            cin.ignore();
-            cin.get();
-            system("cls");
+        userManager.login();
+        if (userManager.isUserLoggedIn()) {
+            heroAfterLogin();
         }
     }
 
-    void registerUser() {
-        string ruserNam, rpassword;
-        cout << "Enter the username: ";
-        cin >> ruserNam;
-        cout << "Enter the password: ";
-        cin >> rpassword;
-
-        ofstream write("userRecords.txt", ios::app); //to write in file
-        write << ruserNam << ' ' << rpassword << endl;
-        write.close();
-
-        system("cls");
-        cout << "Registration is successful!" << endl;
-        cout<<"press any key to go back to the login page "<<endl;
-        cin.get();
-        system("cls");
-        herobeforelogin();
-    }
-
-    void forgotPassword() {
-        int option;
-        system("cls");
-        cout << "Forgot password?" << endl;
-        cout << "Press 1 to search your id by username" << endl;  
-         cout << "Press 2 to go back to the main menu" << endl;
-        cin >> option;
-
-        switch (option) {
-            case 1: {
-                int count = 0;
-                string fuserNam, fid, fpass;
-                cout << "Enter the username which you remember: ";
-                cin >> fuserNam;
-
-                ifstream forg("userRecords.txt");
-                while (forg >> fid >> fpass) {
-                    if (fid == fuserNam) {
-                        count = 1;
-                        break;
-                    }
-                }
-                forg.close();
-
-                if (count == 1) {
-                    cout << "Your account is found!\n";
-                    cout << "Your password is: " << fpass << endl;
-                    cout<<"press any key to go back to the main menu"<<endl;
-                    cin.ignore();
-                    cin.get();
-                    system("cls");
-                } else {
-                    cout << "Sorry! Your account is not found" << endl;
-                }
-                break;
-            }
-                case 2:{
-                  break;
-                  }
-        default:
-        cout << "Please try again" << endl;
-        break;
-        }
-        
-     
-    }
-    void heroAfterlogin() {
-        cout<<"press any key to continue "<<endl;
+    void heroAfterLogin() {
+        cout << "\t\t\t\t\t   Press any key to continue " << endl;
         cin.ignore();
         cin.get();
-        system("start kdaBot.exe");
+        system("cls");
+        system("start KDABOT.exe");
+        heroBeforeLogin();
     }
+
 };
+
 int main() {
-    loginRegistration lg;
-    lg.herobeforelogin();
+    LoginRegistration lg;
+    lg.heroBeforeLogin();
     return 0;
 }
