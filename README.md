@@ -6,8 +6,8 @@ The bot is an all-in-one solution that incorporates a user-friendly interface to
 
 ## Team Members
 
-- [Dipika Chaudhary](https://github.com/notdipika)
 - [Karuna Karki](https://github.com/karkikaruna)
+- [Dipika Chaudhary](https://github.com/notdipika)
 - [Aarju Gautam](https://github.com/aarzugit)
 
 ## 📂 File Structures
@@ -54,11 +54,13 @@ To run the project, follow these steps:
 
 ### 🖼️ Some Snippets:
 ![start](https://github.com/user-attachments/assets/12b3816b-43c3-4f6f-a0de-685d864817a1)
+
 ![chat](https://github.com/user-attachments/assets/97a4dece-b88c-4db2-ba06-201939a964ae)
 
 ![KDA-BOT](https://github.com/user-attachments/assets/1407e49f-f252-4793-8b4f-2337c71ef0ef)
 
 ![KDA-BOT](https://github.com/user-attachments/assets/3b68b227-8450-438a-971d-93a857b5f530)     ![KDA-BOT](https://github.com/user-attachments/assets/67958e40-02b0-4686-9c09-4baac1c15939) 
+
 ![byee](https://github.com/user-attachments/assets/7119da5c-8f93-4f22-b9bf-5d5ecd0dd709)
 
 ## 🛡️ Security and Privacy
