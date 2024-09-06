@@ -20,26 +20,27 @@ The bot is an all-in-one solution that incorporates a user-friendly interface to
 - tictactoe.cpp: handles a responsive tictactoe game with the user.
   
 
-## Run the Project:
+## Instruction to run kda bot 🚀
+   1.Clone the Repository:
+    Clone the repository to your local machine using:
+    git clone https://github.com/karkikaruna/KDA-bot.git
+    -Alternatively, you can download the zip file and extract it to your desired location. 🗂️
+    
+   2.Build the Code:
+     compile the source files using the g++ compiler:
 
-To run the project, follow these steps:
+   Make sure to include all necessary source files in the compilation command. 🛠️
+   
+  3.Run the Program:
+       Execute the compiled program by running the generated .exe file:
+       ./programStart
 
-1. Clone the repository to your local machine:
-   
-bash
-   git clone https://github.com/notdipika/KDA-bot.git
+ 4.Usage:
+  - Register a new account. ✍️
+  - Log in with your credentials. 🔐
+  - Enjoy interacting with KDA-BOT! 🤖
 
-   or <a href="https://github.com/karkikaruna/KDA-bot.git">download</a> the zip file and extract it.
-   
-2. Build the codes of source files using g++ compiler.
-   
-3. Once the build is complete, run the executable .exe file  of programStart.cpp.
-   
-4. At first register and then login and enjoy chatting with KDA-BOT.
-
-   
-
-🔍 Discover What KDA Bot Can Do!
+## Discover 🔍 What KDA Bot Can Do!
 
 - ⏰ **Telling Time** - Get the current time instantly.
 - 🗺️ **Opening Maps** - Find locations and navigate easily.
@@ -55,7 +56,7 @@ bash
 
 ### 🖼️ Some Snippets:
 ![start](https://github.com/user-attachments/assets/12b3816b-43c3-4f6f-a0de-685d864817a1)
-[chat](https://github.com/user-attachments/assets/97a4dece-b88c-4db2-ba06-201939a964ae)
+![chat](https://github.com/user-attachments/assets/97a4dece-b88c-4db2-ba06-201939a964ae)
 
 ![KDA-BOT](https://github.com/user-attachments/assets/1407e49f-f252-4793-8b4f-2337c71ef0ef)
 
