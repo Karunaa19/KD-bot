@@ -23,12 +23,10 @@ To run the project, follow these steps:
    or <a href="https://github.com/karkikaruna/KDA-bot.git">download</a> the zip file and extract it .
   <br> 
   <br>
-2. Compile the source file using g++ compiler.<br>
+2. Build the codes of source files using `g++` compiler.<br>
 <br>
-3.Run the Program:
-     Execute the compiled program by running the generated .exe file of programStart.cpp
-   <br>
-   <br>
+3. Once the build is complete, run the executable `.exe` file  of `programStart.cpp`.<br>
+<br>
 4.Usage:
   - Register a new account. ✍️
   - Log in with your credentials. 🔐
