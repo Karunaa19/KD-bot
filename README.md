@@ -61,4 +61,12 @@ To run the project, follow these steps:
 ![KDA-BOT](https://github.com/user-attachments/assets/3b68b227-8450-438a-971d-93a857b5f530)     ![KDA-BOT](https://github.com/user-attachments/assets/67958e40-02b0-4686-9c09-4baac1c15939) 
 ![byee](https://github.com/user-attachments/assets/7119da5c-8f93-4f22-b9bf-5d5ecd0dd709)
 
+## 🛡️ Security and Privacy
+KDA-BOT does not collect or store any personal information, All tasks including information retrival and application execution  are performed locally on your device. It does not depend on external servers or services. All tasks are performed securely within the confines of your operating system, ensuring that your personal data remains private and protected.
+
+Feel free using KDA-bot ,knowing that your privacy is safeguarded.
+
+## 🤝 Contributions
+Contributions are welcome! Feel free to open issues or submit pull requests. 
+
 
